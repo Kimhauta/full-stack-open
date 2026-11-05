@@ -9,7 +9,7 @@ Exercises and course projects for the [Full Stack Open](https://fullstackopen.co
 | Part | Topic | Status | Exercises |
 | :--- | :--- | :---: | :---: |
 | **Part 0** | Fundamentals of Web apps | Completed | 0.1 – 0.6 |
-| **Part 1** | Introduction to React | Pending | - |
+| **Part 1** | Introduction to React | Completed | 1.1 - 1-14 |
 | **Part 2** | Communicating with server | Pending | - |
 | **Part 3** | Programming a server with NodeJS and Express | Pending | - |
 | **Part 4** | Testing Express servers, user administration | Pending | - |
