@@ -2,6 +2,11 @@
 
 Exercises and course projects for the [Full Stack Open](https://fullstackopen.com/en/) course offered by the University of Helsinki.
 
+## Part 3 - Phonebook Backend
+
+* **Live Application:** https://phonebook-backend-repo-0tbi.onrender.com
+* **Dedicated Backend Repository:** https://github.com/kimhauta/phonebook_backend_repo
+
 ---
 
 ## Course Progress
@@ -10,7 +15,7 @@ Exercises and course projects for the [Full Stack Open](https://fullstackopen.co
 | :--- | :--- | :---: | :---: |
 | **Part 0** | Fundamentals of Web apps | Completed | 0.1 – 0.6 |
 | **Part 1** | Introduction to React | Completed | 1.1 - 1-14 |
-| **Part 2** | Communicating with server | Pending | - |
+| **Part 2** | Communicating with server | Completed | 2.1 - 2.20 |
 | **Part 3** | Programming a server with NodeJS and Express | Pending | - |
 | **Part 4** | Testing Express servers, user administration | Pending | - |
 | **Part 5** | Testing React apps | Pending | - |
