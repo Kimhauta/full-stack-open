@@ -16,7 +16,7 @@ Exercises and course projects for the [Full Stack Open](https://fullstackopen.co
 | **Part 0** | Fundamentals of Web apps | Completed | 0.1 – 0.6 |
 | **Part 1** | Introduction to React | Completed | 1.1 - 1-14 |
 | **Part 2** | Communicating with server | Completed | 2.1 - 2.20 |
-| **Part 3** | Programming a server with NodeJS and Express | Pending | - |
+| **Part 3** | Programming a server with NodeJS and Express | Complete | 3.1 - 3.22 |
 | **Part 4** | Testing Express servers, user administration | Pending | - |
 | **Part 5** | Testing React apps | Pending | - |
 | **Part 6** | State management with Zustand | Pending | - |
