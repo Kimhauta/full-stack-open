@@ -1,0 +1,28 @@
+### Get all blogs
+GET http://localhost:3003/api/blogs
+
+###
+
+### Create a new blog post
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "React patterns",
+  "author": "Michael Chan",
+  "url": "https://reactpatterns.com/",
+  "likes": 7
+}
+
+###
+
+### Create a second blog post
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Canonical string reduction",
+  "author": "Edsger W. Dijkstra",
+  "url": "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+  "likes": 12
+}
