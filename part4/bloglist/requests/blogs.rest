@@ -1,28 +1,74 @@
-### Get all blogs
-GET http://localhost:3003/api/blogs
+@baseUrl = http://localhost:3003/api
 
-###
-
-### Create a new blog post
-POST http://localhost:3003/api/blogs
+### 1. Create a new user (4.15)
+POST {{baseUrl}}/users
 Content-Type: application/json
 
 {
-  "title": "React patterns",
-  "author": "Michael Chan",
-  "url": "https://reactpatterns.com/",
-  "likes": 7
+  "username": "kimmob",
+  "name": "Kimmob",
+  "password": "secretpassword2"
 }
 
-###
+### 2. Get all users with populated blogs (4.15, 4.17)
+GET {{baseUrl}}/users
 
-### Create a second blog post
-POST http://localhost:3003/api/blogs
+### 3. Login to get a JWT token (4.18)
+# @name login
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "username": "kimmoh",
+  "password": "secretpassword"
+}
+
+### 4. Get all blogs with populated user info (4.1, 4.17)
+GET {{baseUrl}}/blogs
+
+### 5. Create a new blog post using the login token (4.19)
+# @name createBlog
+POST {{baseUrl}}/blogs
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.token}}
+
+{
+  "title": "Canonical string reduction part2",
+  "author": "Edsger W. Dijkstra",
+  "url": "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+  "likes": 12
+}
+
+### 6. Update likes on the newly created blog (4.14)
+PUT {{baseUrl}}/blogs/{{createBlog.response.body.id}}
 Content-Type: application/json
 
 {
   "title": "Canonical string reduction",
   "author": "Edsger W. Dijkstra",
   "url": "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
-  "likes": 12
+  "likes": 13
+}
+
+### 7. Delete the newly created blog as its creator (4.13, 4.21)
+DELETE {{baseUrl}}/blogs/{{createBlog.response.body.id}}
+Authorization: Bearer {{login.response.body.token}}
+
+### 8. Verify 401 Unauthorized when creating a blog without a token
+POST {{baseUrl}}/blogs
+Content-Type: application/json
+
+{
+  "title": "Should fail without token",
+  "author": "Anonymous",
+  "url": "https://example.com"
+}
+
+### 9. Verify 400 Bad Request when title or url is missing (4.12)
+POST {{baseUrl}}/blogs
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.token}}
+
+{
+  "author": "Missing Title and URL"
 }
