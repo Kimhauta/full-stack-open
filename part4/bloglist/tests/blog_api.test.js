@@ -94,6 +94,69 @@ describe("addition of a new blog", () => {
   });
 });
 
+describe("deletion of a blog", () => {
+  test("succeeds with status code 204 if id is valid", async () => {
+    const blogsAtStart = await helper.blogsInDb();
+    const blogToDelete = blogsAtStart[0];
+
+    await api.delete(`/api/blogs/${blogToDelete.id}`).expect(204);
+
+    const blogsAtEnd = await helper.blogsInDb();
+    assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length - 1);
+
+    const titles = blogsAtEnd.map((b) => b.title);
+    assert(!titles.includes(blogToDelete.title));
+  });
+
+  test("fails with status code 400 if id is invalid", async () => {
+    const invalidId = "5a3d5da59070081a82a3445";
+
+    await api.delete(`/api/blogs/${invalidId}`).expect(400);
+  });
+});
+
+describe("updating a blog", () => {
+  test("succeeds in updating likes for a valid id", async () => {
+    const blogsAtStart = await helper.blogsInDb();
+    const blogToUpdate = blogsAtStart[0];
+
+    const updatedData = {
+      ...blogToUpdate,
+      likes: blogToUpdate.likes + 10,
+    };
+
+    const response = await api
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send(updatedData)
+      .expect(200)
+      .expect("Content-Type", /application\/json/);
+
+    assert.strictEqual(response.body.likes, blogToUpdate.likes + 10);
+
+    const blogsAtEnd = await helper.blogsInDb();
+    const updatedInDb = blogsAtEnd.find((b) => b.id === blogToUpdate.id);
+    assert.strictEqual(updatedInDb.likes, blogToUpdate.likes + 10);
+  });
+
+  test("fails with status code 404 if blog does not exist", async () => {
+    const validNonexistingId = await helper.nonExistingId();
+
+    await api
+      .put(`/api/blogs/${validNonexistingId}`)
+      .send({ title: "Ghost blog", url: "https://example.com", likes: 1 })
+      .expect(404);
+  });
+
+  test("fails with status code 400 if id is invalid", async () => {
+    const invalidId = "5a3d5da59070081a82a3445";
+
+    await api
+      .put(`/api/blogs/${invalidId}`)
+      .send({ title: "Invalid", url: "https://example.com", likes: 1 })
+      .expect(400);
+  });
+});
+
 after(async () => {
   await mongoose.connection.close();
 });
